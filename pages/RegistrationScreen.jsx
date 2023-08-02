@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import BackgroundContainer from '../BackgroundContainer';
 import { Pressable } from 'react-native';
 import { UserContext } from '../components/UserContext';

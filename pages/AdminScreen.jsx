@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, Image } from 'react-native';
 import BackgroundContainer from '../BackgroundContainer';
 import * as ImagePicker from 'expo-image-picker';
 import { RecipeContext } from '../components/RecipeContext';
@@ -73,11 +73,18 @@ const AdminScreen = () => {
       method: 'DELETE',
     })
       .then((response) => {
-        console.log('Recipe deleted');
-        fetchRecipes();
+        if (response.ok) {
+          console.log('Recipe deleted');
+          fetchRecipes();
+        } else {
+          throw new Error('Failed to delete recipe');
+        }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error('Error deleting recipe:', error);
+      });
   };
+  
 
   const handleSelectImage = async () => {
     try {
@@ -154,18 +161,19 @@ const AdminScreen = () => {
           <Text>Recipes:</Text>
 
           {recipes.map((recipe) => (
-            <View key={recipe.Id} style={styles.recipeContainer}>
-              <Image source={{ uri: recipe.Image }} style={styles.recipeImage} />
-              <Text style={styles.recipeTitle}>{recipe.Title}</Text>
-              <Text>{recipe.Description}</Text>
-              <Text>{recipe.Ingredients}</Text>
-              <Text>{recipe.Instructions}</Text>
-              <Text>Created By: {recipe.CreatedBy}</Text>
-              <Pressable style={styles.buttonDelete} onPress={handleDeleteRecipe}>
-                <Text style={styles.buttonText}>Delete Recipe</Text>
-              </Pressable>
-            </View>
-          ))}
+  <View key={recipe.Id} style={styles.recipeContainer}>
+    <Image source={{ uri: recipe.Image }} style={styles.recipeImage} />
+    <Text style={styles.recipeTitle}>{recipe.Title}</Text>
+    <Text>{recipe.Description}</Text>
+    <Text>{recipe.Ingredients}</Text>
+    <Text>{recipe.Instructions}</Text>
+    <Text>Created By: {recipe.CreatedBy}</Text>
+    <Pressable style={styles.buttonDelete} onPress={() => handleDeleteRecipe(recipe.Id)}>
+      <Text style={styles.buttonText}>Delete Recipe</Text>
+    </Pressable>
+  </View>
+))}
+
 
         </ScrollView>
       </View>

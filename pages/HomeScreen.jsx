@@ -1,6 +1,6 @@
 // HomeScreen.jsx
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import BackgroundContainer from '../BackgroundContainer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { RecipeContext } from '../components/RecipeContext';

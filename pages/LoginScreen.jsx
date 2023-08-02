@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { UserContext } from '../components/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackgroundContainer from '../BackgroundContainer';
